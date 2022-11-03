@@ -13,16 +13,17 @@ const Navbar = () =>{
             <span >Home</span>
                 </Link>
 
-                <Link href='/board'>
+                {/* <Link href='/board'>
             <span>My board</span>
-                </Link>
-                
+                </Link> */}
+
 
 
             </nav>
 
             <SignInButton/>
             </k.Content>
+
         </k.Container>
     )
 }

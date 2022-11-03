@@ -12,7 +12,7 @@ const LogoEffect = keyframes`
 export const Container = styled.header`
 height:6rem;
 background: transparent;
-box-shadow:0 6px 16px -2px #ffabab14;
+box-shadow:0 6px 16px -2px #ffffff33;
 `
 
 export const Content = styled.div`
@@ -24,22 +24,19 @@ export const Content = styled.div`
     justify-content: space-between;
 
     nav{
-        margin-left:5rem;
-        height: 5rem;
-
         a{
             display:inline-block;
             position: relative;
-            padding: 0 ,5rem;
+            padding: 0.5rem;
             height: 5rem;
             line-height: 5rem;
             color: #FFF;
             font-family: 'Montserrat', sans-serif;
             text-decoration: none;
 
-            &+a{
+            @media screen and (max-width:544px){
                 margin-left: 2rem;
-            }
+        }
         }
     }
 
@@ -49,7 +46,7 @@ export const Content = styled.div`
 `
 
 export const Logo = styled.h1`
-        font-size:3rem;
+        font-size:2.5rem;
         cursor: pointer;
         font-weight: normal;
         width: 100px;
@@ -65,4 +62,13 @@ export const Logo = styled.h1`
         font-family: 'Lobster', cursive;
         text-decoration: none;
         animation: ${LogoEffect} 5s linear infinite;
+        margin-left: 2rem;
+
+        @media screen and (max-width:544px){
+            font-size: 2rem;
+        }
+
+        @media screen and (max-width:544px){
+          display:none;
+        }
 `

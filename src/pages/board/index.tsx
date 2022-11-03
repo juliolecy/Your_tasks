@@ -8,6 +8,7 @@ import { useState, FormEvent } from 'react'
 import firebase from '../../services/firebaseConnection'
 import { format} from 'date-fns'
 import Link from 'next/link'
+import { FaEdit } from 'react-icons/fa'
 
 type TaskList = {
     id: string;
@@ -27,7 +28,6 @@ interface Props{
 }
 
 export default function Board({user, data} : Props){
-console.log('cls in user on board index' + user.name)
     const {data:session} = useSession({required:true})
     const [input, setInput]= useState('');
     const [taskList, setTaskList] = useState<TaskList[]>(JSON.parse(data))
@@ -88,7 +88,10 @@ console.log('cls in user on board index' + user.name)
             <title>Schedule</title>
         </Head>
         <k.Container>
-            <form onSubmit={handleAddTask}>
+            <k.Bubble>
+            {taskList.length}
+            </k.Bubble>
+            <k.Form onSubmit={handleAddTask}>
                 <input type="text"
                 placeholder='write your task here'
                 value={input}
@@ -97,9 +100,9 @@ console.log('cls in user on board index' + user.name)
                  <button type='submit'>
                     <FiPlus size={25} color='@17181f'/>
                  </button>
-            </form>
+            </k.Form>
 
-            <h1>You have {taskList.length} {taskList.length === 1 ? 'task' : 'tasks' }!</h1>
+
 
             <section>
                 {taskList.map((task) => (
@@ -110,22 +113,24 @@ console.log('cls in user on board index' + user.name)
                     </Link>
 
                     <k.ActionsContainer>
-                        <div>
+
                             <div>
                                 <FiCalendar size={20} color='#FFB800'/>
                                 <time>{task.createdFormated}</time>
                             </div>
 
-                            <button>
-                                <span>Edit</span>
-                                <FiEdit size={20} color='#FFF'/>
-                            </button>
-                        </div>
+                            <k.ActionsButtons>
+                            <FaEdit
+                            size={20}
+                            color='#FFF'/>
 
-                        <button onClick={()=> handleDelete(task.id)}>
-                            <FiTrash size={20} color="#FF3636"/>
-                            <span>Delete</span>
-                        </button>
+                            <FiTrash
+                            onClick={()=> handleDelete(task.id)}
+                            size={20}
+                            color="#FF3636"/>
+
+
+                            </k.ActionsButtons>
                     </k.ActionsContainer>
 
                 </k.TaskList>
