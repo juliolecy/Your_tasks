@@ -72,6 +72,10 @@ console.log('cls in user on board index' + user.name)
         .delete()
         .then(()=>{
             console.log('task deleted')
+            let deletedTask = taskList.filter(item=>{
+                return (item.id !== id)
+            })
+            setTaskList(deletedTask);
         })
         .catch((err)=>{
             console.log(err)
