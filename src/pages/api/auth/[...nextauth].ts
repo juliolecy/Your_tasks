@@ -1,4 +1,4 @@
-import NextAuth, { Awaitable, Session, User } from "next-auth";
+import NextAuth, { User } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
 type ExtendedUserType = User & { username?: string; uid?: string };
@@ -13,7 +13,7 @@ export default NextAuth({
             // scope: "read:user",
           }),
     ],
-    secret: "fa77bad0363e09f651d0815dd8e3b3b6",
+    secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
             async session({ session, token, user }){
 
