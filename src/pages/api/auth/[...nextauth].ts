@@ -13,7 +13,7 @@ export default NextAuth({
             scope: "read:user",
           }),
     ],
-    secret: process.env.SECRET,
+    secret: "454f30251d65caf7cbc3f79424d86182",
     callbacks: {
             async session({ session, token, user }){
 
