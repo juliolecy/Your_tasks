@@ -25,6 +25,7 @@ export const Container = styled.main`
         width: 90%;
         height: 100%;
         overflow-x: hidden;
+        margin-top: 2rem;
     }
 
     @media screen and (max-width: 420px)

@@ -175,11 +175,9 @@ export default function Board({user, data} : Props){
                     </k.ActionsContainer>
 
                 </k.TaskList>
-                ))};
+                ))}
             </section>
         </k.Container>
-
-
         </>
     )
 }
