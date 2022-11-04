@@ -33,11 +33,19 @@ export const Content = styled.div`
             color: #FFF;
             font-family: 'Montserrat', sans-serif;
             text-decoration: none;
+            font-size: 2.4rem;
 
             @media screen and (max-width:544px){
                 margin-left: 2rem;
         }
+
+        @media screen and(max-width:446px){
+            font-size: 2rem;
+}
+
         }
+
+
     }
 
     button{

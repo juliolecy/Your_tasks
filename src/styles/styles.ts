@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 
 export const Container = styled.main`
@@ -43,6 +44,11 @@ export const Container = styled.main`
         }
     }
 
+    h2{
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
+
     section{
     max-width: 700px;
 
@@ -61,31 +67,105 @@ export const Container = styled.main`
 }
 
 `
+export const GoBoard = styled(Link)`
+position: relative;
+width: 200px;
+height: 60px;
+background: #141414;
+display: flex;
+align-items: center;
+justify-content: center;
+color: rgba(255,255,255,0.5);
+text-transform: uppercase;
+text-decoration: none;
+font-size: 2rem;
+font-weight: 500;
+letter-spacing: 0.2rem;
+gap: 10px;
 
-export const Donaters = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
+&:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #359ad8;
+    transform: scaleX(0);
+    transition: transform 0.5s ease-in-out;
+    transform-origin: right;
+}
 
-    img{
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        border: 2px solid #FFF;
-        transition: all 0.2s;
+&:hover:before{
+    transform: scaleX(1);
+      transform-origin: left;
+}
 
-        + img{
-            margin-left: 10px;
-        }
-    }
+span{
+    display: inline-block;
+    z-index:2;
+    transition: 0.5s ease-in-out;
+}
 
-    img:hover{
-        transform: scale(1.2)
-    }
+&:hover span{
+    color: #333;
+}
 
-    `
+i{
+    position: relative;
+    display: inline-block;
+    width: 2px;
+    height: 30px;
+    background: #359ad8;
+    transition: .5s, width .5s, height .5s;
+    transition-delay: 0s, 0.5s, 1s;
+}
+
+&:hover i{
+    width: 30px;
+    height: 2px;
+    background: #333;
+    transition-delay: 0s, 1s, 0.5s;
+}
+
+i:before{
+    content: '';
+    position: absolute;
+    top: 0.5px;
+    right: 0;
+    width: 50%;
+    height: 2px;
+    background: transparent;
+    transition: 1s;
+    transform-origin: right;
+}
+
+&:hover i:before{
+    background: #333;
+    rotate: 45deg;
+    transition-delay: 1.5s;
+}
+
+i:after{
+    content: '';
+    position: absolute;
+    top: -0.5px;
+    right: 0;
+    width: 50%;
+    height: 2px;
+    background: transparent;
+    transition: 1s;
+    transform-origin: right;
+}
+
+&:hover i:after{
+    background: #333;
+    rotate: -45deg;
+    transition-delay: 1s;
+}
+
+`
+
     export const SocialMediaContainer = styled.div`
     z-index: 9;
     position: fixed;
@@ -101,12 +181,13 @@ export const Donaters = styled.div`
         svg{
             font-size:2rem;
             color: #fff;
+            transition: .5s;
         }
     }
 
     a:hover{
         svg{
-            color: blue;
+
             transform: scale(1.2);
         }
     }

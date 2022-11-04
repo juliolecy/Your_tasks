@@ -3,9 +3,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import * as k from '../styles/styles'
 import BoardImage from '../../public/images/forms.svg'
-import { FaGithub } from 'react-icons/fa'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function Home() {
+    const {data:session} = useSession()
   return (
     <>
     <Head>
@@ -13,20 +16,24 @@ export default function Home() {
     </Head>
         <k.Container>
                 <h1>A tool for your days</h1>
+                {!session && (
+
+                    <h2>Sign in with github to see our services</h2>
+                )}
             <img src='images/forms.svg' alt='board k.Container image'/>
 
+            {session && (
+                <k.GoBoard href='/board'>
+                    <i></i>
+                    <span>Board</span>
+                </k.GoBoard>
+            )}
 
-            <k.Donaters>
-            <img src='https://sujeitoprogramador.com/steve.png' alt='profile'/>
-            </k.Donaters>
             <k.SocialMediaContainer>
-                <a href='#'>
-                    <FaGithub />
+                <a href='https://www.linkedin.com/in/jlins/' target='_blank' rel="noreferrer" >
+                    <FaLinkedin />
                 </a>
-                <a href='#'>
-                    <FaGithub />
-                </a>
-                <a href='#'>
+                <a href='https://github.com/juliolecy/' target='_blank' rel="noreferrer" >
                     <FaGithub />
                 </a>
                 <div>

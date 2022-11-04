@@ -1,7 +1,6 @@
 import * as k from './styles'
 import Head from 'next/head'
-import {FiPlus, FiCalendar, FiEdit2, FiTrash, FiEdit, FiClock} from 'react-icons/fi'
-import SupportButton from '../../components/SupportButton'
+import {FiPlus, FiCalendar, FiTrash, FiClock, FiX} from 'react-icons/fi'
 import { GetServerSideProps } from 'next'
 import { getSession, useSession } from 'next-auth/react'
 import { useState, FormEvent } from 'react'
@@ -31,12 +30,33 @@ export default function Board({user, data} : Props){
     const {data:session} = useSession({required:true})
     const [input, setInput]= useState('');
     const [taskList, setTaskList] = useState<TaskList[]>(JSON.parse(data))
+    const [taskEdit, setTaskEdit] = useState<TaskList | null>(null)
 
    async function handleAddTask(e: FormEvent){
         e.preventDefault()
 
         if(input === ''){
-            alert('Write your task');
+            alert('Write your task, please');
+            return
+        }
+
+        if(taskEdit){
+            await firebase.firestore().collection('tasks')
+            .doc(taskEdit.id)
+            .update({
+                task:input
+            })
+            .then(()=>{
+                let data = taskList;
+                let taskIndex = taskList.findIndex(item=>
+                    item.id === taskEdit.id);
+                    data[taskIndex].task = input;
+
+                    setTaskList(data);
+                    setTaskEdit(null);
+                    setInput('');
+            })
+
             return
         }
 
@@ -82,15 +102,35 @@ export default function Board({user, data} : Props){
         })
     }
 
+    function handleEditTask(task: TaskList){
+        setTaskEdit(task)
+        setInput(task.task)
+    }
+
+    function handleCancelEdit(){
+        setInput('');
+        setTaskEdit(null)
+    }
+
     return(
         <>
         <Head>
-            <title>Schedule</title>
+            <title>Your tasks</title>
         </Head>
         <k.Container>
             <k.Bubble>
             {taskList.length}
             </k.Bubble>
+
+            {taskEdit && (
+                <k.WarnText>
+                    <FiX
+                    onClick={handleCancelEdit}
+                    size={30}
+                    color='#ff3636'/>
+                    You are modifying your task.
+                    </k.WarnText>
+            )}
             <k.Form onSubmit={handleAddTask}>
                 <input type="text"
                 placeholder='write your task here'
@@ -121,6 +161,7 @@ export default function Board({user, data} : Props){
 
                             <k.ActionsButtons>
                             <FaEdit
+                            onClick={()=>handleEditTask(task)}
                             size={20}
                             color='#FFF'/>
 
@@ -138,15 +179,7 @@ export default function Board({user, data} : Props){
             </section>
         </k.Container>
 
-        <k.DonatesContainer >
-            <h2>Thank you for supporting this project</h2>
-            <div>
-                <FiClock size={20} color='#FFF'/>
-                <time>Last donation: 3 days</time>
-            </div>
-        </k.DonatesContainer>
 
-        <SupportButton/>
         </>
     )
 }

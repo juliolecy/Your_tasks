@@ -11,20 +11,28 @@ const SignInButton = () =>{
         return (
             <k.Button
             type="button"
-            onClick={()=>signOut()}>
+            >
                 <img src={session.user?.image} alt='profile'/>
                 Hello, {session.user?.name}
-                <FiX color='#737388' />
+                <FiX onClick={()=>signOut()}
+                color='#737388' />
             </k.Button>
             )
         } else {
             return (
-            <k.Button
-            type="button"
+            // <k.Button
+            // type="button"
+            // onClick={()=>signIn('github')}>
+            //     <FaGithub color='#FFF'/>
+            //     Login with Github
+            // </k.Button>
+
+
+            <k.SignIn
             onClick={()=>signIn('github')}>
-                <FaGithub color='#FFF'/>
-                Login with Github
-            </k.Button>
+                Login
+                <FaGithub/>
+            </k.SignIn>
         )
 }
 }
