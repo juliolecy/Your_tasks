@@ -22,7 +22,7 @@ const SignInButton = () =>{
             return (
 
             <k.SignIn
-            onClick={()=>signIn('github', {callbackUrl: 'https://jlins-your-tasks.vercel.app/'})}>
+            onClick={()=>signIn('github')}>
                 Login
                 <FaGithub/>
             </k.SignIn>
