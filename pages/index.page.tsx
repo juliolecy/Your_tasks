@@ -2,10 +2,8 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import * as k from '../styles/styles'
-import BoardImage from '../../public/images/forms.svg'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { useSession } from 'next-auth/react'
-import Link from 'next/link'
 
 export default function Home() {
     const {data:session} = useSession()

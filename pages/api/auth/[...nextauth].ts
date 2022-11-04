@@ -4,6 +4,7 @@ import GithubProvider from "next-auth/providers/github";
 type ExtendedUserType = User & { username?: string; uid?: string };
 
 export default NextAuth({
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         GithubProvider({
             clientId: process.env.GITHUB_ID,
@@ -13,7 +14,6 @@ export default NextAuth({
             // scope: "read:user",
           }),
     ],
-    secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
             async session({ session, token, user }){
 
