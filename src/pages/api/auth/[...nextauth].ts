@@ -10,10 +10,10 @@ export default NextAuth({
             clientSecret: process.env.GITHUB_SECRET,
             // https://docs.github.com/en/developers/apps/building-oauth-apps/scopes-for-oauth-app
             // @ts-ignore
-            scope: "read:user",
+            // scope: "read:user",
           }),
     ],
-    secret: "454f30251d65caf7cbc3f79424d86182",
+    secret: "fa77bad0363e09f651d0815dd8e3b3b6",
     callbacks: {
             async session({ session, token, user }){
 

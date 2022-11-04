@@ -20,16 +20,9 @@ const SignInButton = () =>{
             )
         } else {
             return (
-            // <k.Button
-            // type="button"
-            // onClick={()=>signIn('github')}>
-            //     <FaGithub color='#FFF'/>
-            //     Login with Github
-            // </k.Button>
-
 
             <k.SignIn
-            onClick={()=>signIn('github')}>
+            onClick={()=>signIn('github', {callbackUrl: 'https://jlins-your-tasks.vercel.app/'})}>
                 Login
                 <FaGithub/>
             </k.SignIn>
