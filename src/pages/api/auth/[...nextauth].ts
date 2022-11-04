@@ -13,20 +13,8 @@ export default NextAuth({
             scope: "read:user",
           }),
     ],
-    session: { strategy: "jwt" },
-    secret: process.env.JWT_SECRET,
+    secret: process.env.SECRET,
     callbacks: {
-            // async signIn({ user, account, profile, email, credentials }) {
-            //   return true
-            // },
-            // async jwt({ token, account, profile }) {
-            // // Persist the OAuth access_token and or the user id to the token right after signin
-            // if (account) {
-            //     token.accessToken = account.access_token
-            //     token.id = profile?.sub
-            // }
-            // return token
-            // },
             async session({ session, token, user }){
                 // Send properties to the client, like an access_token and user id from a provider.
                 (session.user as ExtendedUserType).username = session.user?.name
